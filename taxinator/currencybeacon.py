@@ -1,6 +1,7 @@
 import os
-import requests
 from urllib.parse import urlencode, urljoin
+
+import requests
 
 CURRENCYBEACON_URL = "https://api.currencybeacon.com/v1/"
 

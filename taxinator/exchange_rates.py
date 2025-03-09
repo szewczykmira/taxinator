@@ -1,9 +1,10 @@
-from peewee import Model, SqliteDatabase, CharField, DecimalField, DateField
+import logging
 from datetime import date, timedelta
 from decimal import Decimal
-import logging
-from taxinator.currencybeacon import fetch_historical_rate
 
+from peewee import CharField, DateField, DecimalField, Model, SqliteDatabase
+
+from taxinator.currencybeacon import fetch_historical_rate
 
 log = logging.getLogger(__name__)
 
