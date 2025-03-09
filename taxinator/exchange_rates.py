@@ -1,12 +1,7 @@
-import logging
-from datetime import date, timedelta
+from datetime import date
 from decimal import Decimal
 
 from peewee import CharField, DateField, DecimalField, Model, SqliteDatabase
-
-from taxinator.currencybeacon import fetch_historical_rate
-
-log = logging.getLogger(__name__)
 
 db = SqliteDatabase("exchange_rates.db")
 
@@ -19,33 +14,6 @@ class ExchangeRate(Model):
 
     class Meta:
         database = db
-
-
-def get_data_from_response(response: dict) -> ExchangeRate:
-    base = response.get("base")
-    _date = response.get("date")
-    rates = response.get("rates")
-    for currency, rate in rates.items():
-        print("creating object", base, _date, currency, rate)
-
-        exchange_rate = ExchangeRate.create(
-            base=base, date=_date, to_currency=currency, rate=rate
-        )
-        return exchange_rate
-
-
-def generate_rates_for_year(year: int, base: str, to_currency: str):
-    start_date = date(year, 1, 1)
-    end_date = date(year, 12, 31)
-    current_date = start_date
-    db.connect()
-    while current_date <= end_date:
-        date_isoformat = current_date.isoformat()
-        print(f"Processing date {date_isoformat}")
-        response = fetch_historical_rate(date_isoformat, base, to_currency)
-        print(f"Received response {response}")
-        get_data_from_response(response)
-        current_date += timedelta(days=1)
 
 
 def get_rate(_date: date, base_currency: str, to_currency: str) -> Decimal:
