@@ -8,3 +8,8 @@ dependencies = [
     "black>=25.1.0",
     "peewee>=3.17.9",
 ]
+
+[dependency-groups]
+dev = [
+    "ipython>=9.0.2",
+]
