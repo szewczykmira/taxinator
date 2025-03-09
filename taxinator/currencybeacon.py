@@ -20,6 +20,10 @@ CURRENCYBEACON_URL = "https://api.currencybeacon.com/v1/"
 
 
 def fetch_historical_rate(date: str, base: str, to_currency: str):
+    """Fetch historical data for given date and set of currencies.
+    Returns response.
+    """
+
     if os.environ.get("CURRENCY_BEACON_API_KEY") is None:
         raise ValueError("Currencybeacon is not configured.")
 
