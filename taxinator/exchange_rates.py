@@ -1,5 +1,6 @@
 from peewee import Model, SqliteDatabase, CharField, DecimalField, DateField
 from datetime import date, timedelta
+from decimal import Decimal
 import logging
 from taxinator.currencybeacon import fetch_historical_rate
 
@@ -44,3 +45,11 @@ def generate_rates_for_year(year: int, base: str, to_currency: str):
         print(f"Received response {response}")
         get_data_from_response(response)
         current_date += timedelta(days=1)
+
+
+def get_rate(_date: date, base_currency: str, to_currency: str) -> Decimal:
+    return ExchangeRate.get(
+        ExchangeRate.date == _date,
+        ExchangeRate.base == base_currency,
+        ExchangeRate.to_currency == to_currency,
+    ).rate
