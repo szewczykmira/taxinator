@@ -32,7 +32,7 @@ export CURRENCY_BEACON_API_KEY=...
 
 
 ## Further plans for development
-There is no plans for the future. Hopefully I won't have to run it more than once a year, so I don't see a need to update it any furhter, but if I did I would:
+There is no plans for the future. Hopefully I won't have to run it more than once a year, so I don't see a need to update it any further, but if I did I would:
 1. Add parameters to `generate_rates` script. They should be taken from the command line.
 2. Pass input file as a parameter for `convert` script.
 3. Add more tests
